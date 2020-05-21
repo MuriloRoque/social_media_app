@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   devise_for :users
+  
+  resources :users, only: [:index, :show,:destroy] do
+    member do
+      match 'send_friendship_request' => 'users#send_friendship_request', via: [:get]
+    end
+  end
 
   resources :users, only: [:index, :show]
   resources :posts, only: [:index, :create] do

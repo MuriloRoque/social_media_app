@@ -25,6 +25,6 @@ module ApplicationHelper
     return false if Friendship.where(user_id: user2, friend_id: user1, confirmed: false).exists?
     return 'cancel request' if Friendship.where(user_id: user1, friend_id: user2, confirmed: false).exists?
 
-    'send request'
+    'send request' 
   end
 end

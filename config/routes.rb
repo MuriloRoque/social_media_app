@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :friendships, only: [:index]
     member do
-      put 'confirmation', to: 'users#confirmation'
-      post 'request', to: 'friendships#create'
+      put 'hui', to: 'users#hui'
+      post 'request_friendship', to: 'friendships#create'
       delete 'unfriend', to: 'friendships#destroy'
     end
   end

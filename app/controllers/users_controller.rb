@@ -12,10 +12,23 @@ class UsersController < ApplicationController
     @current_user = User.find(current_user.id)
   end
 
+  def reject
+    f = Friendship.where(user_id: params[:id], friend_id: current_user.id).select('id')
+    Friendship.destroy(f.ids)
+    redirect_to users_path
+  end
+
   def send_req
-    b = Friendship.where(user_id: params[:id], friend_id: current_user.id)
-    if b.exists?
-      b.update_all(confirmed: true)
+    a = Friendship.where(user_id: current_user.id, friend_id: params[:id], confirmed: true)
+    b = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: true)
+    c = Friendship.where(user_id: params[:id], friend_id: current_user.id)
+    if a.exists? || b.exists?
+      Friendship.destroy(a.select('id').ids)
+      Friendship.destroy(b.select('id').ids)
+      redirect_to users_path
+      return
+    elsif c.exists?
+      c.update_all(confirmed: true)
       redirect_to users_path
       return
     end

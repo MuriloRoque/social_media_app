@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :users, only: [:index, :show,:destroy] do
+  resources :users, only: [:index, :show, :destroy] do
     member do
       match 'send_req' => 'users#send_req', via: [:get]
+      match 'reject' => 'users#reject', via: [:get]
     end
   end
 

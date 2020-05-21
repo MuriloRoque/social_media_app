@@ -7,8 +7,12 @@
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <%if !(@current_user.id==user.id)%>
             <%if !(request_response(current_user.id,user.id))%>
+            <h4 class="accept">
               <%= link_to 'Accept request', send_req_user_path(:id => user.id)%>
+            </h4>
+            <h4 class="reject"> 
               <%= link_to 'Reject request', reject_user_path(:id => user.id)%>
+            </h4>
             <%else%>
               <%= link_to request_response(current_user.id,user.id), send_req_user_path(:id => user.id), class: "link"%>
             <%end%>

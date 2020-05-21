@@ -6,6 +6,9 @@
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
         </span>
+        <%= link_to root_path do %>
+          <img class="friend-icon" src="https://img.icons8.com/fluent/48/000000/add-user-group-man-man.png"/>
+        <% end %>
       </li>
     <% end %>
   </ul>

@@ -1,5 +1,10 @@
 <section class="user-section">
+<div class="flex">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <%= link_to root_path do %>
+  <img class="friend-icon" src="https://img.icons8.com/fluent/48/000000/add-user-group-man-man.png"/>
+  <% end %>
+  </div>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">

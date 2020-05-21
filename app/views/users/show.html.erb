@@ -1,8 +1,10 @@
 <section class="user-section">
 <div class="flex">
   <h2><%= "Name: #{@user.name}" %></h2>
-  <%= link_to root_path do %>
+  <% if @user != current_user %>
+  <%= link_to user_path do %>
   <img class="friend-icon" src="https://img.icons8.com/fluent/48/000000/add-user-group-man-man.png"/>
+  <% end %>
   <% end %>
   </div>
   <article class="timeline">

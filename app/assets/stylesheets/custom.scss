@@ -291,11 +291,13 @@ form {
     margin-bottom: 16px;
     text-transform: capitalize;
     font-size: 1.2em;
+    display: flex;
+    align-items: center;
   }
 
   .profile-link {
     font-size: 0.8em;
-    margin: 0 0 8px 0;
+    margin: 0 0 8px 10px;
     color: $primary-color-dark;
   }
 }

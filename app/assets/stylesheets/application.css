@@ -22,3 +22,8 @@
 .flex{
   display: flex;
 }
+
+.request-sent{
+  color: orangered;
+  margin-left: 20px;
+}

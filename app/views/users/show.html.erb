@@ -1,9 +1,17 @@
+<% @pending_request.each do |p| %>
+  <% if @user == current_user %>
+    <%= p.name.capitalize %> wants to be your friend
+    <div class="friend-btn">
+      <%= confirm_button(p) %>
+    </div>
+  <% end %>
+<% end %>
+<%= friendship_button_show(@user) %>
 <section class="user-section">
 <div class="flex">
   <h2><%= "Name: #{@user.name}" %></h2>
   <% if @user != current_user %>
-  <%= link_to request_response(@current_user.id,@user.id), send_req_user_path(:id => @user.id), class: "link"%>
-  <%= link_to request_response do %>
+  <%= link_to root_path do %>
   <img class="friend-icon" src="https://img.icons8.com/fluent/48/000000/add-user-group-man-man.png"/>
   <% end %>
   <% end %>

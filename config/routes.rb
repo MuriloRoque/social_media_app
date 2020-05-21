@@ -4,9 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :users, only: [:index, :show,:destroy] do
+  resources :users, only: [:index, :show] do
+    resources :friendships, only: [:index]
     member do
-      match 'send_friendship_request' => 'users#send_friendship_request', via: [:get]
+      put 'confirmation', to: 'users#confirmation'
+      post 'request', to: 'friendships#create'
+      delete 'unfriend', to: 'friendships#destroy'
     end
   end
 

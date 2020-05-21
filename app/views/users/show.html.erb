@@ -1,8 +1,19 @@
 <section class="user-section">
-  <div><h2 class="inline"><%= "Name: #{@user.name}" %></h2>
+  <div>
+  <h2 class="inline"><%= "Name: #{@user.name}" %></h2>
           <%if !(@current_user.id==@user.id)%>
-          <%= link_to request_response(@current_user.id,@user.id), send_req_user_path(:id => @user.id), class: "link"%>
-          <%end%></div>
+            <%if !(request_friendship(@current_user.id,@user.id))%>
+            <h4 class="accept">
+              <%= link_to 'Accept request', send_friendship_user_path(:id => @user.id)%>
+            </h4>
+            <h4 class="reject"> 
+              <%= link_to 'Reject request', reject_user_path(:id => @user.id)%>
+            </h4>
+            <%else%>
+              <%= link_to request_friendship(@current_user.id,@user.id), send_friendship_user_path(:id => @user.id), class: "link"%>
+            <%end%>
+          <%end%>
+          </div>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">

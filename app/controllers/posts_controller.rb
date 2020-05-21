@@ -28,8 +28,8 @@ class PostsController < ApplicationController
   def timeline_posts
     @timeline_posts = []
     @all = Post.all.ordered_by_most_recent.includes(:user)
-    @all.each do |v|
-      @timeline_posts.push(v) if v.user_id == friends(v.user_id)
+    @all.each do |post|
+      @timeline_posts.push(post) if post.user_id == friends(post.user_id)
     end
   end
 

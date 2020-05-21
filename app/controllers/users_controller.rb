@@ -13,33 +13,36 @@ class UsersController < ApplicationController
   end
 
   def reject
-    f = Friendship.where(user_id: params[:id], friend_id: current_user.id).select('id')
-    Friendship.destroy(f.ids)
-    redirect_to users_path
+    friend_reject = Friendship.where(user_id: params[:id], friend_id: current_user.id).select('id')
+    Friendship.destroy(friend_reject.ids)
+    redirect_back(fallback_location: root_path)
   end
 
-  def send_req
-    a = Friendship.where(user_id: current_user.id, friend_id: params[:id], confirmed: true)
-    b = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: true)
-    c = Friendship.where(user_id: params[:id], friend_id: current_user.id)
-    if a.exists? || b.exists?
-      Friendship.destroy(a.select('id').ids)
-      Friendship.destroy(b.select('id').ids)
-      redirect_to users_path
+  def send_friendship
+    current_friend = Friendship.where(user_id: current_user.id, friend_id: params[:id], confirmed: true)
+    friend_current = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: true)
+    friend_accept = Friendship.where(user_id: params[:id], friend_id: current_user.id)
+    if current_friend.exists? || friend_current.exists?
+      send_friendship_1(current_friend, friend_current)
+      redirect_back(fallback_location: root_path)
       return
-    elsif c.exists?
-      c.update_all(confirmed: true)
-      redirect_to users_path
+    elsif friend_accept.exists?
+      friend_accept.update_all(confirmed: true)
+      redirect_back(fallback_location: root_path)
       return
     end
-    f = Friendship.where(user_id: current_user.id, friend_id: params[:id]).exists?
-    if !f
-      friend_obj = Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false)
-      friend_obj.save
+    friend_delete = Friendship.where(user_id: current_user.id, friend_id: params[:id]).exists?
+    if !friend_delete
+      Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false).save
     else
-      friend_obj = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-      Friendship.destroy(friend_obj.ids)
+      friend_sent = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
+      Friendship.destroy(friend_sent.ids)
     end
-    redirect_to users_path
+    redirect_back(fallback_location: root_path)
   end
+end
+
+def send_friendship_1(current_friend, friend_current)
+  Friendship.destroy(current_friend.select('id').ids)
+  Friendship.destroy(friend_current.select('id').ids)
 end

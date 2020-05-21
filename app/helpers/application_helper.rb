@@ -16,15 +16,15 @@ module ApplicationHelper
     end
   end
 
-  def request_response(user1, user2)
+  def request_friendship(user1, user2)
     if Friendship.where(user_id: user1, friend_id: user2, confirmed: true).exists? ||
        Friendship.where(user_id: user2, friend_id: user1, confirmed: true).exists?
       return 'Unfriend'
     end
 
     return false if Friendship.where(user_id: user2, friend_id: user1, confirmed: false).exists?
-    return 'cancel request' if Friendship.where(user_id: user1, friend_id: user2, confirmed: false).exists?
+    return 'Cancel request' if Friendship.where(user_id: user1, friend_id: user2, confirmed: false).exists?
 
-    'send request'
+    'Request friendship'
   end
 end

@@ -1,28 +1,36 @@
 require 'rails_helper'
+require 'capybara/rspec'
 
-feature 'Sign up, login and logout', type: :feature do
-  feature 'Sign up a new User' do
-    scenario 'Sign up is invalid' do
-      new_registration_path(nil, 'test@gmail.com', '123456', '123456')
-
-      expect(current_path).to eq('/users/sign_up')
-      expect(page).to have_content('errors prohibited this user from being saved')
-      expect(page).to have_content("Name can't be blank")
+describe 'Users controller', type: :feature do
+  before :each do
+    l = User.new(name: 'lucky', email: 'lucky@gmail.com', password: '1234567')
+    l.save
+    m = User.new(name: 'murilo', email: 'murilo@gmail.com', password: '1234567')
+    m.save
+    d = User.new(name: 'daniela', email: 'daniela@gmail.com', password: '1234567')
+    d.save
+    f = Friendship.new(user_id: 1, friend_id: 2, confirmed: false)
+    f.save
+    visit '/users/sign_in'
+    within('form') do
+      fill_in 'user[email]', with: 'murilo@gmail.com'
+      fill_in 'user[password]', with: '1234567'
     end
-
-  #   scenario 'Sign up with valid params' do
-  #     sign_up_user('test user', 'test@gmail.com')
-
-  #     expect(current_path).to eq('/')
-  #     expect(page).to have_content('User was successfully created and logged in')
-  #   end
-
-  #   scenario 'Log in with valid params' do
-  #     sign_up_user('test user', 'test@gmail.com')
-  #     logout_user
-  #     login_user('test@gmail.com')
-  #     expect(current_path).to eq('/')
-  #     expect(page).to have_content('User logged in successfully')
-  #   end
+    click_button 'Log in'
+  end
+  it 'rejects a friend request' do
+    visit '/users'
+    click_link 'reject'
+    expect(page).to have_content 'Request Friendship'
+  end
+  it 'accepts a friend request' do
+    visit '/users'
+    click_link 'accept'
+    expect(page).to have_content 'Unfriend'
+  end
+  it 'sends a friend request' do
+    visit '/users'
+    click_link 'send-request'
+    expect(page).to have_content 'Cancel Request'
   end
 end

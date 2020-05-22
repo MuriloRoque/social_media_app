@@ -8,17 +8,17 @@
           <% if !(@current_user.id == user.id) %>
             <% if (request_friendship(current_user.id,user.id)) == 2 %>
               <h4 class = "accept">
-                <%= link_to 'Accept request', send_friendship_user_path(:id => user.id) %>
+                <%= link_to 'Accept request', send_friendship_user_path(:id => user.id), id: "accept" %>
               </h4>
               <h4 class="reject" > 
-                <%= link_to 'Reject request', reject_user_path(:id => user.id) %>
+                <%= link_to 'Reject request', reject_user_path(:id => user.id), id: "reject" %>
               </h4>
             <% elsif (request_friendship(current_user.id,user.id)) == 1 %>
               <%= link_to 'Unfriend', send_friendship_user_path(:id => user.id), class: "link"%>
             <% elsif (request_friendship(current_user.id,user.id)) == 3 %>
               <%= link_to 'Cancel Request', send_friendship_user_path(:id => user.id), class: "link"%>
             <% else (request_friendship(current_user.id,user.id)) == 4 %>
-              <%= link_to 'Request Friendship', send_friendship_user_path(:id => user.id), class: "link"%>
+              <%= link_to 'Request Friendship', send_friendship_user_path(:id => user.id), class: "link", id: "send-request" %>
             <% end %>
           <% end %>
         </span>

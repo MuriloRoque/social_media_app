@@ -13,3 +13,55 @@
  *= require_tree .
  *= require_self
  */
+
+.friend-icon{
+  width: 30px;
+  margin-left: 20px;
+}
+
+.flex{
+  display: flex;
+}
+
+.request-sent{
+  color: orangered;
+  margin-left: 20px;
+}
+
+.accept{
+  background-color:#008CBA;
+  border-style: solid;
+  border-radius: 20px;
+  border-width: 5px;
+  font-size: 18px;
+  border-color: orangered;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;  
+  margin-left: 10px;
+}
+.accept:hover{
+  background-color: orangered;
+}
+.reject{
+  background-color:green;
+  border-style: solid;
+  border-radius: 20px;
+  border-width: 5px;
+  font-size: 18px;
+  border-color: orangered;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;  
+  margin-left: 10px;
+}
+.reject:hover{
+  background-color: orangered;
+}
+.link{
+  font-size: 20px;
+  color: red;
+}
+.name-tag{
+  
+}

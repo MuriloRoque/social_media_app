@@ -19,8 +19,18 @@ class PostsController < ApplicationController
 
   private
 
+  def friends(user)
+    a = Friendship.where(user_id: current_user.id, friend_id: user, confirmed: true)
+    b = Friendship.where(user_id: user, friend_id: current_user.id, confirmed: true)
+    user if a.exists? || b.exists? || user == current_user.id
+  end
+
   def timeline_posts
-    @timeline_posts ||= Post.all.ordered_by_most_recent.includes(:user)
+    @timeline_posts = []
+    @all = Post.all.ordered_by_most_recent.includes(:user)
+    @all.each do |post|
+      @timeline_posts.push(post) if post.user_id == friends(post.user_id)
+    end
   end
 
   def post_params

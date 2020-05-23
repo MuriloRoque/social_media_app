@@ -43,7 +43,7 @@ a {
   color: $primary-color-light;
 
   .menu {
-    width: 80%;
+    width: 70%;
     justify-content: space-between;
 
     .menu-item {
@@ -63,6 +63,7 @@ a {
   color: $primary-color-light;
   text-transform: uppercase;
   font-weight: 900;
+  padding-left: 10px;
 }
 
 .nav a:hover {
@@ -291,12 +292,17 @@ form {
     margin-bottom: 16px;
     text-transform: capitalize;
     font-size: 1.2em;
+    display: flex;
+    align-items: center;
   }
 
   .profile-link {
-    font-size: 0.8em;
-    margin: 0 0 8px 0;
-    color: $primary-color-dark;
+    font-size: 15px;
+    margin: 0 10px 8px 10px;
+    color: black;
+    display: flexbox;
+    padding-top: 10px;
+
   }
 }
 

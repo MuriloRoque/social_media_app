@@ -42,6 +42,8 @@ class UsersController < ApplicationController
   end
 end
 
+private
+
 def send_friendship_1(current_friend, friend_current)
   Friendship.destroy(current_friend.select('id').ids)
   Friendship.destroy(friend_current.select('id').ids)

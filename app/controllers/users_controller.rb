@@ -13,33 +13,32 @@ class UsersController < ApplicationController
   end
 
   def reject
-    friend_reject = Friendship.where(user_id: params[:id], friend_id: current_user.id).select('id')
-    Friendship.destroy(friend_reject.ids)
+    friendship = current_user.pending_friendships.find_by(friend_id: params[:id])
+    friendship.destroy
     redirect_back(fallback_location: root_path)
   end
 
   def send_friendship
-    Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false).save
+    friendship = current_user.friendships.build(friend_id: params[:id], confirmed: false)
+    friendship.save
     redirect_back(fallback_location: root_path)
   end
 
   def accept
-    friend = Friendship.where(user_id: params[:id], friend_id: current_user.id)
-    friend.update_all(confirmed: true)
+    friend = User.find(params[:id]) 
+    current_user.confirm_friend(friend)
     redirect_back(fallback_location: root_path)
   end
 
   def cancel
-    friend = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-    Friendship.destroy(friend.ids)
+    friendship = current_user.pending_friendships.find_by(friend_id: params[:id])
+    friendship.destroy
     redirect_back(fallback_location: root_path)
   end
 
   def unfriend
-    current_friend = Friendship.where(user_id: current_user.id, friend_id: params[:id], confirmed: true)
-    friend_current = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: true)
-    Friendship.destroy(current_friend.select('id').ids)
-    Friendship.destroy(friend_current.select('id').ids)
+    friend = current_user.confirmed_friendships.find_by(friend_id: params[:id])
+    friend.destroy_friendship
     redirect_back(fallback_location: root_path)
   end
 end

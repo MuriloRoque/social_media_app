@@ -2,6 +2,8 @@
   <div>
   <h2 class="inline"><%= "Name: #{@user.name}" %></h2>
           <% if !(@current_user.id == @user.id) %>
+            <% count = @user.mutual_friends(@current_user, @user) %>
+            <p class="mutual"> Mutual friends : <%= count %></p>
             <% if (request_friendship(@current_user.id, @user.id)) == 2 %>
               <h4 class="accept">
                 <%= link_to 'Accept request', send_friendship_user_path(:id => @user.id) %>

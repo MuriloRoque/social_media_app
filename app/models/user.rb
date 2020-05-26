@@ -13,12 +13,12 @@ class User < ApplicationRecord
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
   def mutual_friends(current_user, user)
-    count = 0
+    count = []
     user.friendships.where(confirmed: true).each do |friendship|
-      count += 1 if current_user.friends?(friendship.friend_id)
+      count << User.find(friendship.friend_id).name if current_user.friends?(friendship.friend_id)
     end
     user.inverse_friendships.where(confirmed: true).each do |friendship|
-      count += 1 if current_user.friends?(friendship.user_id)
+      count << User.find(friendship.user_id).name if current_user.friends?(friendship.user_id)
     end
     count
   end

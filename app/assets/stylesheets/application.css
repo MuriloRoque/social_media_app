@@ -61,10 +61,15 @@
 .link{
   font-size: 20px;
   color: red;
+  width: 33%;
 }
 .mutual{
   display: inline-flex;
   padding-left: 10px;
   padding-right: 10px;
   color: black;
+  width: 33%;
+}
+.name-tag{
+  width: 30%;
 }

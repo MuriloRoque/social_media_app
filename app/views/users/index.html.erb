@@ -6,8 +6,6 @@
         <span class = "profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <% if !(@current_user.id == user.id) %>
-            <% count = user.mutual_friends(@current_user, user) %>
-            <p class="mutual"> Mutual friends : <%= count %></p>
             <% if (request_friendship(user)) == 2 %>
               <h4 class = "accept">
                 <%= link_to 'Accept request', accept_user_path(:id => user.id), id: "accept" %>

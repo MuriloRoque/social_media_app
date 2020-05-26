@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def reject
-    friendship = current_user.pending_friendships.find_by(friend_id: params[:id])
+    friendship = current_user.incoming_friendships.find_by(friend_id: current_user.id)
     friendship.destroy
     redirect_back(fallback_location: root_path)
   end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def accept
-    friend = User.find(params[:id]) 
+    friend = User.find(params[:id])
     current_user.confirm_friend(friend)
     redirect_back(fallback_location: root_path)
   end
@@ -42,5 +42,3 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 end
-
-

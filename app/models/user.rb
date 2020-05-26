@@ -22,24 +22,9 @@ class User < ApplicationRecord
   has_many :incoming_friendships, -> { where confirmed: false }, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :incoming_friends, through: :incoming_friendships, source: :user
 
-  def mutual_friends(current_user, user)
-    count = []
-    user.friendships.where(confirmed: true).each do |friendship|
-      count << User.find(friendship.friend_id).name if current_user.friends?(friendship.friend_id)
-    end
-    user.inverse_friendships.where(confirmed: true).each do |friendship|
-      count << User.find(friendship.user_id).name if current_user.friends?(friendship.user_id)
-    end
-    count
-  end
-
   def friends?(id)
     Friendship.where(user_id: self.id, friend_id: id, confirmed: true).exists? ||
       Friendship.where(friend_id: self.id, user_id: id, confirmed: true).exists?
-  end
-
-  def friends_and_own_posts
-    Post.where(user: (self.friends + self))
   end
 
   def confirm_friend(user)

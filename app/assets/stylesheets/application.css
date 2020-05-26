@@ -33,7 +33,7 @@
   border-style: solid;
   border-radius: 20px;
   border-width: 5px;
-  font-size: 18px;
+  font-size: 13px;
   border-color: orangered;
   display: inline-flex;
   align-items: center;
@@ -48,7 +48,7 @@
   border-style: solid;
   border-radius: 20px;
   border-width: 5px;
-  font-size: 18px;
+  font-size: 13px;
   border-color: orangered;
   display: inline-flex;
   align-items: center;
@@ -62,6 +62,9 @@
   font-size: 20px;
   color: red;
 }
-.name-tag{
-  
+.mutual{
+  display: inline-flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
 }

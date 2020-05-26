@@ -1,13 +1,13 @@
 <section class="users-section">
   <ul class="users-list">
     <% @users.each do |user| %>
-      <li>
+      <li> 
         Name: <%= user.name %>
         <span class = "profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <% if !(@current_user.id == user.id) %>
             <% count = user.mutual_friends(@current_user, user) %>
-            <p> Mutual friends : <%= count %></p>
+            <p class="mutual"> Mutual friends : <%= count %></p>
             <% if (request_friendship(current_user.id,user.id)) == 2 %>
               <h4 class = "accept">
                 <%= link_to 'Accept request', send_friendship_user_path(:id => user.id), id: "accept" %>

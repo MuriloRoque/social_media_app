@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def friends?(id)
-    Friendship.where(user_id: self.id,friend_id: id,confirmed: true).exists? || Friendship.where(friend_id: self.id,user_id: id,confirmed: true).exists?
+    Friendship.where(user_id: self.id, friend_id: id, confirmed: true).exists? ||
+      Friendship.where(friend_id: self.id, user_id: id, confirmed: true).exists?
   end
-
 end

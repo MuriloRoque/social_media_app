@@ -33,4 +33,8 @@ describe 'Users controller', type: :feature do
     click_link 'send-request'
     expect(page).to have_content 'Cancel Request'
   end
+  it 'has mutual friends' do
+    visit '/users'
+    expect(page).to have_content 'Mutual friends'
+  end
 end

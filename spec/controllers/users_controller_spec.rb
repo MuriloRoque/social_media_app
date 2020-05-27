@@ -9,7 +9,7 @@ describe 'Users controller', type: :feature do
     m.save
     d = User.new(name: 'daniela', email: 'daniela@gmail.com', password: '1234567')
     d.save
-    f = Friendship.new(user_id: 1, friend_id: 2, confirmed: false)
+    f = Friendship.new(user_id: l.id, friend_id: m.id, confirmed: false)
     f.save
     visit '/users/sign_in'
     within('form') do

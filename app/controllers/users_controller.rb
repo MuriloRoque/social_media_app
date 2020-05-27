@@ -13,36 +13,32 @@ class UsersController < ApplicationController
   end
 
   def reject
-    friend_reject = Friendship.where(user_id: params[:id], friend_id: current_user.id).select('id')
-    Friendship.destroy(friend_reject.ids)
+    friendship = current_user.incoming_friendships.find_by(friend_id: current_user.id)
+    friendship.destroy
     redirect_back(fallback_location: root_path)
   end
 
   def send_friendship
-    current_friend = Friendship.where(user_id: current_user.id, friend_id: params[:id], confirmed: true)
-    friend_current = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: true)
-    friend_accept = Friendship.where(user_id: params[:id], friend_id: current_user.id)
-    if current_friend.exists? || friend_current.exists?
-      send_friendship_1(current_friend, friend_current)
-      redirect_back(fallback_location: root_path)
-      return
-    elsif friend_accept.exists?
-      friend_accept.update_all(confirmed: true)
-      redirect_back(fallback_location: root_path)
-      return
-    end
-    friend_delete = Friendship.where(user_id: current_user.id, friend_id: params[:id]).exists?
-    if !friend_delete
-      Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false).save
-    else
-      friend_sent = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-      Friendship.destroy(friend_sent.ids)
-    end
+    friendship = current_user.friendships.build(friend_id: params[:id], confirmed: false)
+    friendship.save
     redirect_back(fallback_location: root_path)
   end
-end
 
-def send_friendship_1(current_friend, friend_current)
-  Friendship.destroy(current_friend.select('id').ids)
-  Friendship.destroy(friend_current.select('id').ids)
+  def accept
+    friend = User.find(params[:id])
+    current_user.confirm_friend(friend)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def cancel
+    friendship = current_user.pending_friendships.find_by(friend_id: params[:id])
+    friendship.destroy
+    redirect_back(fallback_location: root_path)
+  end
+
+  def unfriend
+    friend = current_user.confirmed_friendships.find_by(friend_id: params[:id])
+    friend.destroy_friendship
+    redirect_back(fallback_location: root_path)
+  end
 end

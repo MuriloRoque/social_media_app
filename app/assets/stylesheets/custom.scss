@@ -75,6 +75,7 @@ a {
   flex-direction: column;
   align-items: center;
   padding: 16px;
+  justify-content: center;
 }
 
 .notice,
@@ -294,15 +295,16 @@ form {
     font-size: 1.2em;
     display: flex;
     align-items: center;
+    margin-left: 20%;
   }
 
   .profile-link {
     font-size: 15px;
     margin: 0 10px 8px 10px;
-    color: black;
+    color: blue;
     display: flexbox;
     padding-top: 10px;
-
+    width: 80%;
   }
 }
 
@@ -332,7 +334,7 @@ form {
   .timeline,
   .users-section,
   .user-section {
-    width: 70%;
+    width: 100%;
   }
 }
 
@@ -345,6 +347,6 @@ form {
   .timeline,
   .users-section,
   .user-section {
-    width: 50%;
+    width: 100%;
   }
 }

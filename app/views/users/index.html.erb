@@ -6,18 +6,18 @@
         <span class = "profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <% if !(@current_user.id == user.id) %>
-            <% if (request_friendship(user)) == 2 %>
+            <% if @incoming_friends.include?(user) %>
               <h4 class = "accept">
                 <%= link_to 'Accept request', accept_user_path(:id => user.id), id: "accept" %>
               </h4>
               <h4 class="reject" > 
                 <%= link_to 'Reject request', reject_user_path(:id => user.id), id: "reject" %>
               </h4>
-            <% elsif (request_friendship(user)) == 1 %>
+            <% elsif @friends.include?(user) %>
               <%= link_to 'Unfriend', unfriend_user_path(:id => user.id), class: "link"%>
-            <% elsif (request_friendship(user)) == 3 %>
+            <% elsif @pending_friends.include?(user) %>
               <%= link_to 'Cancel Request', cancel_user_path(:id => user.id), class: "link"%>
-            <% else (request_friendship(user)) == 4 %>
+            <% else %>
               <%= link_to 'Request Friendship', send_friendship_user_path(:id => user.id), class: "link", id: "send-request" %>
             <% end %>
           <% end %>

@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @current_user = User.find(current_user.id)
+    @friends = @current_user.friends.to_a
+    @incoming_friends = @current_user.incoming_friends.to_a
+    @pending_friends = @current_user.pending_friends.to_a
   end
 
   def show

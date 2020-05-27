@@ -2,6 +2,8 @@
 
 > This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
 
+![screenshot](docs/screenshot.png)
+
 ## Built With
 
 - Ruby v2.7.0
@@ -9,7 +11,7 @@
 
 ## Live Demo
 
-TBA 
+https://blooming-stream-41205.herokuapp.com/users/sign_in
 
 
 ## Getting Started

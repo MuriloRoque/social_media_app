@@ -2,7 +2,7 @@
 
 # Social media App
 
-![screenshot](docs/screenshot.png)
+![screenshot](images/screenshot.png)
 
 In this app, the user can:
 

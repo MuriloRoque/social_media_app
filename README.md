@@ -1,71 +1,40 @@
-# Scaffold for social media app with Ruby on Rails
+[![hire-badge](https://img.shields.io/badge/Consult%20/%20Hire%20Murilo-Click%20to%20Contact-brightgreen)](mailto:muriloengqui@gmail.com) [![Twitter Follow](https://img.shields.io/twitter/follow/MuriloRoquePai1?label=Follow%20Murilo%20on%20Twitter&style=social)](https://twitter.com/MuriloRoquePai1)
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+# Social media App
 
 ![screenshot](docs/screenshot.png)
 
+In this app, the user can:
+
+- Invite another user to be a friend;
+- Accept another user's friend request;
+- Write posts and share with friends;
+- Comment on a post;
+- Like a post or a comment.
+
 ## Built With
 
-- Ruby v2.7.0
-- Ruby on Rails v5.2.4
+Ruby on Rails, HTML and SCSS.
 
 ## Live Demo
 
 [Click for Live App](https://blooming-stream-41205.herokuapp.com/users/sign_in)
 
-
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+- Clone the project to your local machine;
+- `cd` into the project directory;
+- Run `bundle install` to install the necessary gems;
+- Run `rails db:create`;
+- Run `rails db:migrate`;
+- Run `rails s` to start a server in your computer;
+- In your browser address, type the following URL: [localhost:3000](localhost:3000);
+- Enjoy the App and its functionalities!
 
-### Prerequisites
+## Running RSpec tests
 
-Ruby: 2.6.3
-Rails: 5.2.3
-Postgres: >=9.5
-
-### Setup
-
-Instal gems with:
-
-```
-bundle install
-```
-
-Setup database with:
-
-```
-   rails db:create
-   rails db:migrate
-```
-
-
-
-### Usage
-
-Start server with:
-
-```
-    rails server
-```
-
-Open `http://localhost:3000/` in your browser.
-
-### Run tests
-```
-    rails db:reset
-
-```
-
-```
-   bundle exec rpsec --format documentation
-```
-
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
-
-### Deployment
-
-[Heroku](https://blooming-stream-41205.herokuapp.com/users/sign_in)
+- `cd` into the project directory;
+- Run `bundle exec rspec`.
 
 ## Authors
 
@@ -83,14 +52,16 @@ Murilo Roque Paiva da Silva
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues and feature requests are welcome! Start by:
 
-Feel free to check the [issues page](issues/).
+- Forking the project
+- Cloning the project to your local machine
+- `cd` into the project directory
+- Run `git checkout -b your-branch-name`
+- Make your contributions
+- Push your branch up to your forked repository
+- Open a Pull Request with a detailed description to the development branch of the original project for a review
 
 ## Show your support
 
 Give a ⭐️ if you like this project!
-
-## Acknowledgments
-
-This is a Microverse project done by students, it was initializated by another student and continuated by us.
